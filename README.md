@@ -1,98 +1,249 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🔐 NestJS JWT Authentication with Passport.js
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This repository contains an example API built with **NestJS** to demonstrate a robust authentication system using **Passport.js** with the **JWT (JSON Web Tokens) strategy**. It's ideal for learning how to secure routes and manage stateless sessions in Node.js applications.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## ✨ Features
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+* **User Registration:** Allows new users to create an account.
+* **User Authentication:** Login with credentials (username/password) and issuance of a JWT token.
+* **Route Protection:** Routes that require authentication via a JWT token.
+* **User Profile:** Access to authenticated user data.
 
-## Project setup
+---
 
-```bash
-$ pnpm install
-```
+## 🚀 Technologies Used
 
-## Compile and run the project
+* [**NestJS**](https://nestjs.com/): A progressive Node.js framework for building efficient, reliable, and scalable server-side applications.
+* [**Passport.js**](http://www.passportjs.org/): Flexible and modular authentication middleware for Node.js.
+* [**Passport-JWT**](https://www.npmjs.com/package/passport-jwt): Passport strategy for authenticating using JSON Web Tokens.
+* [**bcrypt**](https://www.npmjs.com/package/bcrypt): Library for password hashing.
+* [**jsonwebtoken**](https://www.npmjs.com/package/jsonwebtoken): For signing and verifying JSON Web Tokens.
+* [**TypeScript**](https://www.typescriptlang.org/): A programming language that adds static typing to JavaScript.
+* [**pnpm**](https://pnpm.io/): A fast and efficient package manager.
 
-```bash
-# development
-$ pnpm run start
+---
 
-# watch mode
-$ pnpm run start:dev
+## ⚙️ Prerequisites
 
-# production mode
-$ pnpm run start:prod
-```
+Make sure you have the following tools installed in your development environment:
 
-## Run tests
+* [Node.js](https://nodejs.org/en/download/) (LTS version recommended)
+* A package manager:
+    * [pnpm](https://pnpm.io/installation) (install globally: `npm install -g pnpm`)
+    * [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) (comes with Node.js)
+    * [Yarn](https://classic.yarnpkg.com/en/docs/install) (install globally: `npm install -g yarn`)
 
-```bash
-# unit tests
-$ pnpm run test
+---
 
-# e2e tests
-$ pnpm run test:e2e
+## 💻 Installation
 
-# test coverage
-$ pnpm run test:cov
-```
+Follow the steps below to set up the project locally:
 
-## Deployment
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/daviramosds/nestjs-passportjs-jwt.git](https://github.com/daviramosds/nestjs-passportjs-jwt.git)
+    cd nestjs-passportjs-jwt
+    ```
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+2.  **Install dependencies using your preferred package manager:**
+    * **pnpm:**
+        ```bash
+        pnpm install
+        ```
+    * **npm:**
+        ```bash
+        npm install
+        ```
+    * **Yarn:**
+        ```bash
+        yarn install
+        ```
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+3.  **Create the environment variables file:**
+    Create a `.env` file in the project root and configure the necessary variables.
 
-```bash
-$ pnpm install -g @nestjs/mau
-$ mau deploy
-```
+    ```
+    # .env
+    JWT_SECRET=your_strong_random_secret_key_here
+    JWT_EXPIRES_IN=1h # Example: 1 hour
+    JWT_REFRESH_SECRET=your_refresh_secret_key_here
+    JWT_REFRESH_EXPIRES_IN=7d # Example: 7 days
+    PORT=3000
+    ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+    **Remember:** The `JWT_SECRET` should be a long, complex string, securely generated.
 
-## Resources
+---
 
-Check out a few resources that may come in handy when working with NestJS:
+## ▶️ Running the Application
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### Development Mode
 
-## Support
+To run the application in development mode with hot-reload using your preferred package manager:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+* **pnpm:**
+    ```bash
+    pnpm start:dev
+    ```
+* **npm:**
+    ```bash
+    npm run start:dev
+    ```
+* **Yarn:**
+    ```bash
+    yarn start:dev
+    ```
 
-## Stay in touch
+The application will be available at `http://localhost:3000` (or the port defined in `.env`).
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Production Mode
 
-## License
+To compile and run the application in production mode:
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+1.  **Compile the TypeScript code using your preferred package manager:**
+    * **pnpm:**
+        ```bash
+        pnpm build
+        ```
+    * **npm:**
+        ```bash
+        npm run build
+        ```
+    * **Yarn:**
+        ```bash
+        yarn build
+        ```
+
+2.  **Start the application using your preferred package manager:**
+    * **pnpm:**
+        ```bash
+        pnpm start
+        ```
+    * **npm:**
+        ```bash
+        npm run start
+        ```
+    * **Yarn:**
+        ```bash
+        yarn start
+        ```
+
+---
+
+## 🌐 API Endpoints
+
+The API exposes the following endpoints. It is recommended to use tools like [Postman](https://www.postman.com/), [Insomnia](https://insomnia.rest/), or the [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) VS Code extension for testing.
+
+**Base URL:** `http://localhost:3000` (or your configured port)
+
+### `POST /auth/register` - Register a new user
+
+Creates a new user account.
+
+* **Request Body:**
+    ```json
+    {
+      "username": "new_user",
+      "password": "secure_password123",
+      "email": "new.user@example.com"
+    }
+    ```
+
+* **Success Response (201 Created):**
+    ```json
+    {
+      "message": "User registered successfully",
+      "user": {
+        "id": "user-uuid",
+        "username": "new_user",
+        "email": "new.user@example.com"
+      }
+    }
+    ```
+
+* **Error Response (400 Bad Request):** If username/email already exists or invalid data.
+
+### `POST /auth/login` - Authenticate a user
+
+Logs in and returns a JWT token.
+
+* **Request Body:**
+    ```json
+    {
+      "username": "existing_user",
+      "password": "secure_password123"
+    }
+    ```
+
+* **Success Response (200 OK):**
+    ```json
+    {
+      "accessToken": "eyJhbGciOiJIUzI1Ni...",
+      "refreshToken": "eyJhbGciOiJIUzI1Ni..."
+    }
+    ```
+
+* **Error Response (401 Unauthorized):** Invalid credentials.
+
+### `GET /users/profile` - Get user profile (Protected Route)
+
+Returns information about the authenticated user. Requires a valid JWT in the `Authorization` header.
+
+* **Request Headers:**
+    ```
+    Authorization: Bearer <your_access_token_jwt>
+    ```
+
+* **Success Response (200 OK):**
+    ```json
+    {
+      "id": "user-uuid",
+      "username": "authenticated_user",
+      "email": "authenticated.user@example.com"
+    }
+    ```
+
+* **Error Response (401 Unauthorized):** Missing, invalid, or expired token.
+
+---
+
+## 🔑 JWT Authentication Flow
+
+1.  The client sends credentials (username/password) to `POST /auth/login`.
+2.  The API validates the credentials. If valid, it generates an **Access Token** (short-lived JWT) and, optionally, a **Refresh Token** (long-lived JWT).
+3.  The API returns the tokens to the client.
+4.  The client stores the tokens (typically the Access Token in memory, the Refresh Token in secure storage).
+5.  To access protected routes (e.g., `/users/profile`), the client sends the **Access Token** in the `Authorization` header as `Bearer <Access Token>`.
+6.  The API uses Passport.js with the JWT strategy to verify the Access Token's validity. If the token is valid, the request proceeds.
+7.  If the Access Token expires, the client can use the **Refresh Token** (sent to an endpoint like `POST /auth/refresh-token`) to obtain a new Access Token without needing to log in again.
+
+---
+
+## 🏗️ Project Structure (Example)
+
+```text
+nestjs-passportjs-jwt/
+├── src/
+│   ├── auth/                       # Authentication module (JWT strategies, services, controllers)
+│   │   ├── auth.controller.ts
+│   │   ├── auth.module.ts
+│   │   ├── auth.service.ts
+│   │   └── strategies/             # Passport.js strategies (jwt.strategy.ts, local.strategy.ts)
+│   │       └── constants.ts        # Constants like the JWT Secret
+│   ├── users/                      # Users module (services, controllers, entities)
+│   │   ├── users.controller.ts
+│   │   ├── users.module.ts
+│   │   └── users.service.ts
+│   ├── main.ts                     # NestJS application entry point
+│   └── app.module.ts               # Root application module
+├── types/                          # Type definitions for interfaces (IUser, ICreateUserBody, IUserQueryParams)
+│   └── user.d.ts
+├── .env.example                    # Example environment variables file
+├── .gitignore                      # Files and folders to be ignored by Git
+├── nest-cli.json                   # Nest CLI configurations
+├── package.json                    # Project dependencies and scripts
+├── pnpm-lock.yaml                  # pnpm lockfile
+├── tsconfig.build.json             # TypeScript configuration for build
+└── tsconfig.json                   # TypeScript configuration
